@@ -1,29 +1,42 @@
-#cloud-config # Required header for cloud-init
-autoinstall: 
-  version: 1 # Autoinstall config version 
+#cloud-config
+autoinstall:
+  version: 1
   locale: en_GB.UTF-8
+
   keyboard:
     layout: gb
+
   identity:
-    hostname: ubuntu-26.04 # Hostname of the machine
-    username: petru # Default user to create
-    password: "$6$sAHVsMyDkBwu1iCs$JvwQpdvfO5OOn2.0wdg4idfyd5BEZ5.NGLiwPODw9l2AzdJS/aDtvq0g0hh3/y5qCdEWMRctnn2sQfVRU08mG1" # Hashed password (SHA-512)
-  ssh: install-server: true # Install OpenSSH server 
-  allow-pw: true # Allow password-based SSH login
+    hostname: ubuntu-2604
+    username: petru
+    password: "$6$sAHVsMyDkBwu1iCs$JvwQpdvfO5OOn2.0wdg4idfyd5BEZ5.NGLiwPODw9l2AzdJS/aDtvq0g0hh3/y5qCdEWMRctnn2sQfVRU08mG1"
+
+  ssh:
+    install-server: true
+    allow-pw: true
+
   storage:
     layout:
-      name: direct  # Automatically use entire disk (WIPES DISK)
+      name: direct
+
   network:
+    version: 2
     ethernets:
-      enp1s0:
-        dhcp4: true  # Configures the network interface to use DHCP for obtaning an IP address
-    version: 2Ad
+      ens18:                 # ✅ Correct for most Proxmox VMs (VirtIO NIC)
+        dhcp4: false
+        addresses:
+          - 192.168.1.50/24
+        gateway4: 192.168.1.1
+        nameservers:
+          addresses:
+            - 8.8.8.8
+            - 1.1.1.1
+
   packages:
-    - vim # Install vim 
-    - curl # Install curl 
-    - git # Install git 
+    - vim
+    - curl
+    - git
+
   late-commands:
-    - curtin in-target -- apt update # Run apt update inside the installed system
-    - curtin in-target -- systemctl enable ssh # Enable the SSH server 
-    - echo "Installation complete!"
-    - hostname -I # Display the IP address of the machine
+    - curtin in-target -- apt update
+    - curtin in-target -- systemctl enable ssh
