@@ -7,7 +7,7 @@ autoinstall:
   identity:
     hostname: ubuntu-26.04 # Hostname of the machine
     username: petru # Default user to create
-    password: "$6$examplehash$REPLACETHISWITHYOURHASHEDPASSWORD" # Hashed password (SHA-512)
+    password: "$6$sAHVsMyDkBwu1iCs$JvwQpdvfO5OOn2.0wdg4idfyd5BEZ5.NGLiwPODw9l2AzdJS/aDtvq0g0hh3/y5qCdEWMRctnn2sQfVRU08mG1" # Hashed password (SHA-512)
   ssh: install-server: true # Install OpenSSH server 
   allow-pw: true # Allow password-based SSH login
   storage:
