@@ -25,7 +25,7 @@ autoinstall:
       ens18:                 # ✅ Correct for most Proxmox VMs (VirtIO NIC)
         dhcp4: false
         addresses:
-          - 172.16.10.50/24
+          - 172.16.10.150/24
         gateway4: 172.16.10.1
         nameservers:
           addresses:
