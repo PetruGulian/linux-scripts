@@ -9,7 +9,7 @@ autoinstall:
   identity:
     hostname: ubuntu-2604
     username: petru
-    password: "$6$sAHVsMyDkBwu1iCs$JvwQpdvfO5OOn2.0wdg4idfyd5BEZ5.NGLiwPODw9l2AzdJS/aDtvq0g0hh3/y5qCdEWMRctnn2sQfVRU08mG1"
+    password: "$6$somesalt$EUZ8kwCc9ep8lwTsoHcm8wXYMdLqh3YAtp4ktYpdUUOcyADb2reM98LiO4Pcx2IDmtcop411xXuTyswFdy5nG/"
 
   ssh:
     install-server: true
