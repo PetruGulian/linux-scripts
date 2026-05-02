@@ -1,0 +1,29 @@
+#cloud-config # Required header for cloud-init
+autoinstall: 
+  version: 1 # Autoinstall config version 
+  locale: en_GB.UTF-8
+  keyboard:
+    layout: gb
+  identity:
+    hostname: ubuntu-26.04 # Hostname of the machine
+    username: petru # Default user to create
+    password: "$6$examplehash$REPLACETHISWITHYOURHASHEDPASSWORD" # Hashed password (SHA-512)
+  ssh: install-server: true # Install OpenSSH server 
+  allow-pw: true # Allow password-based SSH login
+  storage:
+    layout:
+      name: direct  # Automatically use entire disk (WIPES DISK)
+  network:
+    ethernets:
+      enp1s0:
+        dhcp4: true  # Configures the network interface to use DHCP for obtaning an IP address
+    version: 2Ad
+  packages:
+    - vim # Install vim 
+    - curl # Install curl 
+    - git # Install git 
+  late-commands:
+    - curtin in-target -- apt update # Run apt update inside the installed system
+    - curtin in-target -- systemctl enable ssh # Enable the SSH server 
+    - echo "Installation complete!"
+    - hostname -I # Display the IP address of the machine
